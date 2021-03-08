@@ -88,7 +88,7 @@ namespace elevator
                 {
                     for (int i = Elevator.startfloor; startfloor != endfloor; startfloor--)
                     {
-                        Console.WriteLine("Лифт на {0} этаже.", startfloor);
+                        Console.WriteLine("Лифт на {0} этаже.",startfloor);
                         control();
                     }
                 }
