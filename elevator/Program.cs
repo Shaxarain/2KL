@@ -15,8 +15,8 @@ namespace elevator
             static int startfloor = 1; //этаж, на котором стоит лифт.
             static int endfloor; //куда надо попасть.
             static int carrying = 5; //грузоподъёмность в людях (не больше 5 челов).
-            static int alotof = 0;
-            static bool opendoor = true; // состояние дверей true = открыты.
+            static int alotof = 0; //реальное количество людишек
+            static bool opendoor = true; // состояние дверей true = можно открыть.
             static bool work = true; //Чтобы свалить.
             public static void uroboros()
             {
