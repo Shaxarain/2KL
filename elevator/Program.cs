@@ -38,6 +38,7 @@ namespace elevator
                         break;
                     case "Спасибо":
                         Console.WriteLine("Оу, эм... пожалуйста.");
+                        control();
                         break;
                 }
             }
@@ -97,6 +98,7 @@ namespace elevator
                     Console.WriteLine("Ой какое совпадение, а я уже тут.");
                 }
                 Console.WriteLine("Лифт на {0} этаже. Мы на месте.", startfloor);
+                control();
             }
             public static void end()
             {
