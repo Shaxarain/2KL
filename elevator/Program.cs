@@ -53,6 +53,9 @@ namespace elevator
                     case "goaway":
                         goaway();
                         break;
+                    default:
+                        Console.WriteLine("Ничего дельного не было нажато...");
+                        break;
                 }
             }
             public static void open()
@@ -99,6 +102,7 @@ namespace elevator
                 if (opendoor == true)
                 {
                     Console.WriteLine("А сколько вас? Больше 5 не беру.");
+                    
                     alotof += Convert.ToInt32(Console.ReadLine());
                     if (alotof > carrying)
                     {
