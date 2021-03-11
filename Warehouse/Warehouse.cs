@@ -11,25 +11,14 @@ namespace Warehouse
         public int area;
         public ArrayList products = new ArrayList();
         public bool type; //true = open
-        public string resp_emp;
+        public string main_emp;
         public int quantity;
 
-        public Warehouse(string a, int b, bool c) { a = adress; b = area; c = type; }
+        public Warehouse(string a, int b, bool c) { adress = a; area = b; type = c; }
 
-        Boolean isOpen()
-        {
-            if (type == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
         public string Adding(IProduct p)
         {
-            if(p.type == "grit" && type == true)
+            if(p.type == "grit" && this.type == true)
             {
                 return "Product not added to warehouse";
             }
@@ -38,6 +27,11 @@ namespace Warehouse
                 this.products.Add(p);
                 return "Product added to warehouse";
             }
+        }
+        public string Addresp_emp(Employee e)
+        {
+            this.main_emp = e.name;
+            return "This warehouse have a new main employee - " + e.name;
         }
     }
 }

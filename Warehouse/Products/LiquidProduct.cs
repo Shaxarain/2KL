@@ -12,6 +12,6 @@ namespace Warehouse
         public string description { get; set; }
         public int price { get; set; }
 
-        public LiquidProduct (string a, string b, int c) { a = name; b = SKU; c = price; }
+        public LiquidProduct (string a, string b, int c) { name = a; SKU = b; price = c; }
     }
 }

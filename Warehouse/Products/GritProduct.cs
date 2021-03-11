@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Warehouse.Products
+namespace Warehouse
 {
     class GritProduct: IProduct
     {
@@ -11,5 +11,7 @@ namespace Warehouse.Products
         public string SKU { get; set; }
         public string description { get; set; }
         public int price { get; set; }
+
+        public GritProduct(string a, string b, int c) { name = a; SKU = b; price = c; }
     }
 }

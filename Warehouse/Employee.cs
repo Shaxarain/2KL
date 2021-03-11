@@ -6,7 +6,8 @@ namespace Warehouse
 {
     class Employee
     {
-        string name { get; set; }
-        string position { get; set; }
+        public string name { get; set; }
+        public string position { get; set; }
+        public Employee(string a, string b) { name = a; position = b; }
     }
 }
