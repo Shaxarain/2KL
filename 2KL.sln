@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2KL", "2KL\2KL.csproj", "{6CECD7DB-6735-4014-B129-A0483B06C4A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "elevator", "elevator\elevator.csproj", "{B88239F2-92EF-4B3A-9FEC-3E66A05088B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "elevator", "elevator\elevator.csproj", "{B88239F2-92EF-4B3A-9FEC-3E66A05088B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse", "Warehouse\Warehouse.csproj", "{0F628158-0D53-47FA-BCCB-FDE47DC8800C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B88239F2-92EF-4B3A-9FEC-3E66A05088B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B88239F2-92EF-4B3A-9FEC-3E66A05088B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B88239F2-92EF-4B3A-9FEC-3E66A05088B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F628158-0D53-47FA-BCCB-FDE47DC8800C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F628158-0D53-47FA-BCCB-FDE47DC8800C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F628158-0D53-47FA-BCCB-FDE47DC8800C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F628158-0D53-47FA-BCCB-FDE47DC8800C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
