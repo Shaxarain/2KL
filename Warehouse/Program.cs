@@ -28,6 +28,7 @@ namespace Warehouse
             //Check Adding
             string AdResult1 = HouseofLiquid.Adding(sugar);
             HouseofLiquid.Adding(poison);
+            HouseofLiquid.Adding(poison); //more product...
             HouseofLiquid.Adding(aj);
             HouseofLiquid.Adding(bj);
 
@@ -50,8 +51,15 @@ namespace Warehouse
             int AdResult4 = HouseofLiquid.Totalprice();
             AdResult4 += HouseofGrit.Totalprice();
             AdResult4 += HouseofObject.Totalprice();
+            int hoo_price = HouseofObject.Totalprice();
+            Console.WriteLine(hoo_price);
             Console.WriteLine(AdResult4);
 
+            //Check moving
+            string AdResult5 = HouseofLiquid.Move(poison, HouseofObject);
+            Console.WriteLine(AdResult5);
+            hoo_price = HouseofObject.Totalprice();
+            Console.WriteLine(hoo_price);
         }
     }
 }

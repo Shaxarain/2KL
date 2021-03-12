@@ -54,5 +54,11 @@ namespace Warehouse
             }
             return money;
         }
+        public string Move(IProduct a, Warehouse b)
+        {
+            this.products.Remove(a);
+            b.Adding(a);
+            return "The product was trying to migrate";
+        }
     }
 }
