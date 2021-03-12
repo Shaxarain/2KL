@@ -33,5 +33,16 @@ namespace Warehouse
             this.main_emp = e.name;
             return "This warehouse have a new main employee - " + e.name;
         }
+        public string SKUfinder(string a)
+        {
+            foreach (IProduct i in this.products)
+            {
+                if (i.SKU == a)
+                {
+                    return i.name;
+                }
+            }
+            return "No this product on this warehouse";
+        }
     }
 }

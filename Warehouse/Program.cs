@@ -33,8 +33,7 @@ namespace Warehouse
             string AdResult2 = HouseofObject.Addresp_emp(Archi);
             Console.WriteLine(AdResult2);
 
-            //find products by SKU
-
+            
 
             //sum all warehouse
 
