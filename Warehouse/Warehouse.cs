@@ -39,10 +39,20 @@ namespace Warehouse
             {
                 if (i.SKU == a)
                 {
-                    return i.name;
+                    return "Product with this USK is " + i.name;
                 }
             }
             return "No this product on this warehouse";
+        }
+
+        public int Totalprice()
+        {
+            int money = 0;
+            foreach(IProduct i in this.products)
+            {
+                money += i.price;
+            }
+            return money;
         }
     }
 }

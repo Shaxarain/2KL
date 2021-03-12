@@ -7,7 +7,7 @@ namespace Warehouse
     {
         static void Main(string[] args)
         {
-            Employee Archi = new Employee("Arthur", "boss");
+            Employee Archi = new Employee("Archibald", "Dog");
             Employee Ch = new Employee("Cheburek", "Cooker");
 
             Warehouse HouseofLiquid = new Warehouse("Privet Drive", 500, true);
@@ -25,22 +25,33 @@ namespace Warehouse
             IProduct heart = new ObjectProduct("heart of human", "200", 5000);
             IProduct mouse = new ObjectProduct("dead mouse","201", 0);
 
+            //Check Adding
             string AdResult1 = HouseofLiquid.Adding(sugar);
+            HouseofLiquid.Adding(poison);
             HouseofLiquid.Adding(aj);
             HouseofLiquid.Adding(bj);
+
+            HouseofGrit.Adding(sugar);
+            HouseofGrit.Adding(cocaine);
+
+            HouseofObject.Adding(heart);
+            HouseofObject.Adding(mouse);
+
             Console.WriteLine(AdResult1);
 
+            //Check... this
             string AdResult2 = HouseofObject.Addresp_emp(Archi);
             Console.WriteLine(AdResult2);
-
+            //Check
+            string AdResult3 = HouseofLiquid.SKUfinder("011");
+            Console.WriteLine(AdResult3);
             
+            //Price of all Warehouses
+            int AdResult4 = HouseofLiquid.Totalprice();
+            AdResult4 += HouseofGrit.Totalprice();
+            AdResult4 += HouseofObject.Totalprice();
+            Console.WriteLine(AdResult4);
 
-            //sum all warehouse
-
-            /*foreach (IProduct lel in HouseofLiquid.products)
-            {
-                Console.WriteLine(lel.name);
-            }*/
         }
     }
 }
