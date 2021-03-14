@@ -20,7 +20,6 @@ namespace Warehouse
 
 
             IProduct poison = new LiquidProduct("poison", "000", 666);
-
             IProduct aj = new LiquidProduct("apple juice", "010", 560);
             IProduct bj = new LiquidProduct("berry juice", "011", 600);
 
@@ -32,19 +31,17 @@ namespace Warehouse
             IProduct mouse = new ObjectProduct("dead mouse","201", 0);
 
             //Check Adding
-            string AdResult1 = HouseofLiquid.Adding(sugar, 8);
-            string Res0 = HouseofLiquid.Adding(poison, 2);
-            Console.WriteLine(Res0);
-            string Res1 = HouseofLiquid.Adding(poison, 3); //more product..
-            Console.WriteLine(Res1);
-            HouseofLiquid.Adding(aj, 1);
-            HouseofLiquid.Adding(bj, 1);
+            string AdResult1 = HouseofLiquid.Adding(sugar);
+            HouseofLiquid.Adding(poison);
+            HouseofLiquid.Adding(poison); //more product...
+            HouseofLiquid.Adding(aj);
+            HouseofLiquid.Adding(bj);
 
-            HouseofGrit.Adding(sugar, 5);
-            HouseofGrit.Adding(cocaine, 228);
+            HouseofGrit.Adding(sugar);
+            HouseofGrit.Adding(cocaine);
 
-            HouseofObject.Adding(heart, 8);
-            HouseofObject.Adding(mouse, 3);
+            HouseofObject.Adding(heart);
+            HouseofObject.Adding(mouse);
 
             Console.WriteLine(AdResult1);
 
@@ -64,7 +61,7 @@ namespace Warehouse
             Console.WriteLine(AdResult4);
 
             //Check moving
-            string AdResult5 = HouseofLiquid.Move(poison, HouseofObject, 4);
+            string AdResult5 = HouseofLiquid.Move(poison, HouseofObject);
             Console.WriteLine(AdResult5);
             hoo_price = HouseofObject.Totalprice();
             Console.WriteLine(hoo_price);

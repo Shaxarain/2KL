@@ -16,33 +16,16 @@ namespace Warehouse
 
         public Warehouse(Address a, int b, bool c) { address = a; area = b; type = c; }
 
-        public string Adding(IProduct p, int q)
+        public string Adding(IProduct p)
         {
-            IProduct t = (IProduct)p.Clone();
-            if (p.type == "grit" && this.type == true)
+            if(p.type == "grit" && this.type == true)
             {
-                return "Product " + p.name + " not added to warehouse ";
+                return "Product not added to warehouse";
             }
             else
             {
-                if (!Finder(p.SKU)) //если в листе этого товара ещё нет
-                {
-                    t.quantity += q;
-                    this.products.Add(t);
-                    return "Product " + p.name + " added to warehouse and quantity = " + q;
-                }
-                else
-                {
-                    foreach (IProduct i in this.products)
-                    {
-                        if (i.SKU == p.SKU)
-                        {
-                            i.quantity += q;
-                            return "Now quantity of " + i.name + " = " + i.quantity;
-                        }
-                    }
-                    return "lel";
-                }
+                this.products.Add(p);
+                return "Product added to warehouse";
             }
         }
         public string Addresp_emp(Employee e)
@@ -61,17 +44,6 @@ namespace Warehouse
             }
             return "No this product on this warehouse";
         }
-        public bool Finder(string a)
-        {
-            foreach (IProduct i in this.products)
-            {
-                if (i.SKU == a)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         public int Totalprice()
         {
@@ -82,18 +54,11 @@ namespace Warehouse
             }
             return money;
         }
-        public string Move(IProduct a, Warehouse b, int q)
+        public string Move(IProduct a, Warehouse b)
         {
-            foreach (IProduct i in this.products)
-            {
-                if (i.SKU == a.SKU)
-                {
-                    i.quantity -= q;
-                    return "Now quantity of " + i.name + " = " + i.quantity;
-                }
-            }
-            b.Adding(a, q);
-            return "The product was migrate";
+            this.products.Remove(a);
+            b.Adding(a);
+            return "The product was trying to migrate";
         }
     }
 }
