@@ -7,14 +7,14 @@ namespace Warehouse
 {
     class Warehouse
     {
-        public string adress;
+        Address address;
         public int area;
         public ArrayList products = new ArrayList();
         public bool type; //true = open
         public string main_emp;
         public int quantity;
 
-        public Warehouse(string a, int b, bool c) { adress = a; area = b; type = c; }
+        public Warehouse(Address a, int b, bool c) { address = a; area = b; type = c; }
 
         public string Adding(IProduct p)
         {

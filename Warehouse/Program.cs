@@ -10,9 +10,14 @@ namespace Warehouse
             Employee Archi = new Employee("Archibald", "Dog");
             Employee Ch = new Employee("Cheburek", "Cooker");
 
-            Warehouse HouseofLiquid = new Warehouse("Privet Drive", 500, true);
-            Warehouse HouseofObject = new Warehouse("Forest", 1000, false);
-            Warehouse HouseofGrit = new Warehouse("Sandbox", 333, false);
+            Address sc = new Address("Somewhere", "Somestreet", 55);
+            Address ololo = new Address("Ololand", "Olostreet", 01010);
+            Address Dudley = new Address("Surrey", "Privet Drive", 4) ;
+
+            Warehouse HouseofLiquid = new Warehouse(sc, 500, true);
+            Warehouse HouseofObject = new Warehouse(ololo, 1000, false);
+            Warehouse HouseofGrit = new Warehouse(Dudley, 333, false);
+
 
             IProduct poison = new LiquidProduct("poison", "000", 666);
             IProduct aj = new LiquidProduct("apple juice", "010", 560);
