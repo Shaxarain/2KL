@@ -8,6 +8,6 @@ namespace Warehouse
     {
         public string name { get; set; }
         public string position { get; set; }
-        public Employee(string a, string b) { name = a; position = b; }
+        public Employee(string a, string b) { name = a; position =b; }
     }
 }
