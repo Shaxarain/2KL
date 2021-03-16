@@ -21,7 +21,7 @@ namespace Warehouse
             IProduct t = (IProduct)p.Clone();
             if (p.type == "grit" && this.type == true)
             {
-                return "Product " + p.name + " not added to warehouse ";
+                throw new Exception("Grit products are not added to open warehouses");
             }
             else
             {

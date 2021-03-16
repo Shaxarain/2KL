@@ -12,7 +12,7 @@ namespace Warehouse
 
             Address sc = new Address("Somewhere", "Somestreet", 55);
             Address ololo = new Address("Ololand", "Olostreet", 01010);
-            Address Dudley = new Address("Surrey", "Privet Drive", 4) ;
+            Address Dudley = new Address("Surrey", "Privet Drive", 4);
 
             Warehouse HouseofLiquid = new Warehouse(sc, 500, true);
             Warehouse HouseofObject = new Warehouse(ololo, 1000, false);
@@ -27,10 +27,9 @@ namespace Warehouse
             cocaine.description = "Not a cocaine";
 
             IProduct heart = new ObjectProduct("heart of human", "200", 5000);
-            IProduct mouse = new ObjectProduct("dead mouse","201", 0);
+            IProduct mouse = new ObjectProduct("dead mouse", "201", 0);
 
             //Check Adding
-            string AdResult1 = HouseofLiquid.Adding(sugar, 8);
             string Res0 = HouseofLiquid.Adding(poison, 2);
             Console.WriteLine(Res0);
             string Res1 = HouseofLiquid.Adding(poison, 3); //more product..
@@ -44,15 +43,13 @@ namespace Warehouse
             HouseofObject.Adding(heart, 8);
             HouseofObject.Adding(mouse, 3);
 
-            Console.WriteLine(AdResult1);
-
             //Check... this
             string AdResult2 = HouseofObject.Addresp_emp(Archi);
             Console.WriteLine(AdResult2);
             //Check
             string AdResult3 = HouseofLiquid.SKUfinder("011");
             Console.WriteLine(AdResult3);
-            
+
             //Price of all Warehouses
             int AdResult4 = HouseofLiquid.Totalprice();
             AdResult4 += HouseofGrit.Totalprice();
@@ -68,7 +65,18 @@ namespace Warehouse
             hoo_price = HouseofObject.Totalprice();
             Console.WriteLine(hoo_price);
 
-
+            try
+            {
+                HouseofLiquid.Adding(sugar, 1);
+            }
+            catch (Exception opengrit)
+            {
+                Console.WriteLine("Error! " + opengrit.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Test complited");
+            }
         }
     }
 }
