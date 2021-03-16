@@ -78,7 +78,7 @@ namespace Warehouse
             int money = 0;
             foreach(IProduct i in this.products)
             {
-                money += i.price;
+                money += i.price*i.quantity;
             }
             return money;
         }

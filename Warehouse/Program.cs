@@ -17,8 +17,6 @@ namespace Warehouse
             Warehouse HouseofLiquid = new Warehouse(sc, 500, true);
             Warehouse HouseofObject = new Warehouse(ololo, 1000, false);
             Warehouse HouseofGrit = new Warehouse(Dudley, 333, false);
-
-
             IProduct poison = new LiquidProduct("poison", "000", 666);
 
             IProduct aj = new LiquidProduct("apple juice", "010", 560);
@@ -69,6 +67,8 @@ namespace Warehouse
 
             hoo_price = HouseofObject.Totalprice();
             Console.WriteLine(hoo_price);
+
+
         }
     }
 }
