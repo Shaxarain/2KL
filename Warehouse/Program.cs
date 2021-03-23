@@ -64,6 +64,7 @@ namespace Warehouse
 
             hoo_price = HouseofObject.Totalprice();
             Console.WriteLine(hoo_price);
+            Console.WriteLine("test");
 
             try
             {
