@@ -5,6 +5,10 @@ namespace Warehouse
 {
     class Program
     {
+        private static void DisplayMessage(object sengder, AddProdEventArgs ea)
+        {
+            Console.WriteLine(ea.AddProdMes);
+        }
         static void Main(string[] args)
         {
             Employee Archi = new Employee("Archibald", "Dog");
@@ -15,8 +19,12 @@ namespace Warehouse
             Address Dudley = new Address("Surrey", "Privet Drive", 4);
 
             Warehouse HouseofLiquid = new Warehouse(sc, 500, true);
+            HouseofLiquid.AdProdNotify += DisplayMessage;
+            HouseofLiquid.UncorAddNotify += DisplayMessage;
             Warehouse HouseofObject = new Warehouse(ololo, 1000, false);
+            HouseofObject.AdProdNotify += DisplayMessage;
             Warehouse HouseofGrit = new Warehouse(Dudley, 333, false);
+            HouseofGrit.AdProdNotify += DisplayMessage;
             IProduct poison = new LiquidProduct("poison", "000", 666);
 
             IProduct aj = new LiquidProduct("apple juice", "010", 560);
@@ -29,13 +37,10 @@ namespace Warehouse
             IProduct heart = new ObjectProduct("heart of human", "200", 5000);
             IProduct mouse = new ObjectProduct("dead mouse", "201", 0);
 
-            //Check Adding
-            string Res0 = HouseofLiquid.Adding(poison, 2);
-            Console.WriteLine(Res0);
-            string Res1 = HouseofLiquid.Adding(poison, 3); //more product..
-            Console.WriteLine(Res1);
             HouseofLiquid.Adding(aj, 1);
             HouseofLiquid.Adding(bj, 1);
+            HouseofLiquid.Adding(poison, 5);
+            HouseofLiquid.Adding(poison, 10);
 
             HouseofGrit.Adding(sugar, 5);
             HouseofGrit.Adding(cocaine, 228);

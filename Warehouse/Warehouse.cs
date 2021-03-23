@@ -14,13 +14,18 @@ namespace Warehouse
         public string main_emp;
         public int quantity;
 
+        public delegate void AddProd(Object sender, AddProdEventArgs ea);
+        public event AddProd AdProdNotify;
+        public event AddProd UncorAddNotify;
+
         public Warehouse(Address a, int b, bool c) { address = a; area = b; type = c; }
 
-        public string Adding(IProduct p, int q)
+        public void Adding(IProduct p, int q)
         {
             IProduct t = (IProduct)p.Clone();
             if (p.type == "grit" && this.type == true)
             {
+                UncorAddNotify?.Invoke(this, new AddProdEventArgs("Grit products are not added to open warehouses", this.address, p.name));
                 throw new Exception("Grit products are not added to open warehouses");
             }
             else
@@ -29,7 +34,7 @@ namespace Warehouse
                 {
                     t.quantity += q;
                     this.products.Add(t);
-                    return "Product " + p.name + " added to warehouse and quantity = " + q;
+                    AdProdNotify?.Invoke(this, new AddProdEventArgs("Product added to warehouse", this.address, p.name));
                 }
                 else
                 {
@@ -38,10 +43,9 @@ namespace Warehouse
                         if (i.SKU == p.SKU)
                         {
                             i.quantity += q;
-                            return "Now quantity of " + i.name + " = " + i.quantity;
+                            AdProdNotify?.Invoke(this, new AddProdEventArgs("Product added to warehouse", this.address, p.name));
                         }
                     }
-                    return "lel";
                 }
             }
         }
@@ -72,7 +76,6 @@ namespace Warehouse
             }
             return false;
         }
-
         public int Totalprice()
         {
             int money = 0;
@@ -89,7 +92,7 @@ namespace Warehouse
                 if (i.SKU == a.SKU)
                 {
                     i.quantity -= q;
-                    return "Now quantity of " + i.name + " = " + i.quantity;
+                    return i.name + " was moving and quantity there = " + i.quantity;
                 }
             }
             b.Adding(a, q);
