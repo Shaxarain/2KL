@@ -13,5 +13,10 @@ namespace Warehouse
             MT = MT.OrderBy(j => j.quantity);
             return MT.ToList();
         }
+        public static List<IProduct> Unicum(this Warehouse a, Warehouse b)
+        {
+            IEnumerable<IProduct> Uni = (a.products).Union(b.products);
+            return Uni.ToList();
+        }
     }
 }

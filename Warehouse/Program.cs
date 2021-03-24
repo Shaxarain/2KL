@@ -93,23 +93,30 @@ namespace Warehouse
             HouseofGrit.Adding(cocaine, 0);
 
             List<IProduct>Morethree = HouseofAll.MoreThree();
+            Console.WriteLine("More than three products:");
             foreach (IProduct i in Morethree)
             {
                 Console.WriteLine(i.name + " " + i.quantity);
             }
+            List<IProduct> Universal = HouseofAll.Unicum(HouseofGrit);
+            Console.WriteLine("Universal names..."); //We have a problems!!!
+            foreach (IProduct i in Universal)
+            {
+                Console.WriteLine(i.name);
+            }
 
-/*            try
-            {
-                HouseofLiquid.Adding(sugar, 1);
-            }
-            catch (Exception opengrit)
-            {
-                Console.WriteLine("Error! " + opengrit.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Test complited");
-            }*/
+            /*            try
+                        {
+                            HouseofLiquid.Adding(sugar, 1);
+                        }
+                        catch (Exception opengrit)
+                        {
+                            Console.WriteLine("Error! " + opengrit.Message);
+                        }
+                        finally
+                        {
+                            Console.WriteLine("Test complited");
+                        }*/
         }
     }
 }
