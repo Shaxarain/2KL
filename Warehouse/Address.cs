@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Warehouse
 {
-    class Address
+    public class Address
     {
         public string city { get; set; }
         string street { get; set; }

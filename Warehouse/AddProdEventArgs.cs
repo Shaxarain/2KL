@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Warehouse
 {
-    class AddProdEventArgs
+    public class AddProdEventArgs
     {
         public string AddProdMes;
         Address NameofWarehouse;

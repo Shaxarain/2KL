@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Warehouse.Products;
 
 namespace Warehouse
 {
@@ -48,28 +49,35 @@ namespace Warehouse
             HouseofObject.Adding(heart, 8);
             HouseofObject.Adding(mouse, 3);
 
-            //Check... this
-            string AdResult2 = HouseofObject.Addresp_emp(Archi);
-            Console.WriteLine(AdResult2);
-            //Check
-            string AdResult3 = HouseofLiquid.SKUfinder("011");
-            Console.WriteLine(AdResult3);
+            string EmpofWare = HouseofObject.Addresp_emp(Archi);
+            string SKUofProd = HouseofLiquid.SKUfinder("011");
+            Console.WriteLine(SKUofProd);
 
             //Price of all Warehouses
-            int AdResult4 = HouseofLiquid.Totalprice();
-            AdResult4 += HouseofGrit.Totalprice();
-            AdResult4 += HouseofObject.Totalprice();
+            int FinPrice = HouseofLiquid.Totalprice();
+            FinPrice += HouseofGrit.Totalprice();
+            FinPrice += HouseofObject.Totalprice();
             int hoo_price = HouseofObject.Totalprice();
             Console.WriteLine(hoo_price);
-            Console.WriteLine(AdResult4);
+            Console.WriteLine(FinPrice);
 
-            //Check moving
-            string AdResult5 = HouseofLiquid.Move(poison, HouseofObject, 4);
-            Console.WriteLine(AdResult5);
+            string Mov = HouseofLiquid.Move(poison, HouseofObject, 4);
+            Console.WriteLine(Mov);
 
             hoo_price = HouseofObject.Totalprice();
             Console.WriteLine(hoo_price);
             Console.WriteLine("test");
+
+            string NameSKUtest = heart.NameSKU();
+            Console.WriteLine(NameSKUtest);
+
+            HouseofObject.Adding(aj, 7);
+            ArrayList matches = HouseofLiquid.ProdofTwo(HouseofObject);
+            Console.WriteLine("Products in two warehouses:");
+            foreach(IProduct i in matches)
+            {
+                Console.WriteLine(i.name);
+            }
 
             try
             {

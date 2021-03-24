@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Warehouse
 {
-    interface IProduct : ICloneable
+    public interface IProduct : ICloneable
     {
         string name { get; set; }
         string type { get; set;}

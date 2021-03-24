@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Warehouse
 {
-    class Employee
+    public class Employee
     {
         public string name { get; set; }
         public string position { get; set; }

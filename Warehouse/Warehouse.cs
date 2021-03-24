@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace Warehouse
 {
-    class Warehouse
+    public class Warehouse
     {
         Address address;
         public int area;
@@ -92,11 +92,11 @@ namespace Warehouse
                 if (i.SKU == a.SKU)
                 {
                     i.quantity -= q;
-                    return i.name + " was moving and quantity there = " + i.quantity;
+                    b.Adding(a, q);
+                    return $"{q} {i.name} was moving in quantity and there left = {i.quantity}";
                 }
             }
-            b.Adding(a, q);
-            return "The product was migrate";
+            return "The product was not migrate";
         }
     }
 }
