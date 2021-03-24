@@ -18,6 +18,7 @@ namespace Warehouse
             Address sc = new Address("Somewhere", "Somestreet", 55);
             Address ololo = new Address("Ololand", "Olostreet", 01010);
             Address Dudley = new Address("Surrey", "Privet Drive", 4);
+            Address Neverhood = new Address("Neverland", "Neverstreet", 10);
 
             Warehouse HouseofLiquid = new Warehouse(sc, 500, true);
             HouseofLiquid.AdProdNotify += DisplayMessage;
@@ -26,8 +27,9 @@ namespace Warehouse
             HouseofObject.AdProdNotify += DisplayMessage;
             Warehouse HouseofGrit = new Warehouse(Dudley, 333, false);
             HouseofGrit.AdProdNotify += DisplayMessage;
-            IProduct poison = new LiquidProduct("poison", "000", 666);
+            Warehouse HouseofAll = new Warehouse(Neverhood, 100, false);
 
+            IProduct poison = new LiquidProduct("poison", "000", 666);
             IProduct aj = new LiquidProduct("apple juice", "010", 560);
             IProduct bj = new LiquidProduct("berry juice", "011", 600);
 
@@ -48,6 +50,14 @@ namespace Warehouse
 
             HouseofObject.Adding(heart, 8);
             HouseofObject.Adding(mouse, 3);
+
+            HouseofAll.Adding(poison, 10);
+            HouseofAll.Adding(aj, 10);
+            HouseofAll.Adding(bj, 10);
+            HouseofAll.Adding(sugar, 10);
+            HouseofAll.Adding(cocaine, 10);
+            HouseofAll.Adding(heart, 10);
+            HouseofAll.Adding(mouse, 10);
 
             string EmpofWare = HouseofObject.Addresp_emp(Archi);
             string SKUofProd = HouseofLiquid.SKUfinder("011");
@@ -78,6 +88,13 @@ namespace Warehouse
             {
                 Console.WriteLine(i.name);
             }
+
+            string Reshalf = HouseofGrit.HalfofProd(HouseofAll, cocaine);
+            Console.WriteLine(Reshalf);
+            HouseofAll.Move(cocaine, HouseofGrit, 10);
+            Reshalf = HouseofGrit.HalfofProd(HouseofAll, cocaine);
+            Console.WriteLine(Reshalf);
+            HouseofGrit.Adding(cocaine, 0);
 
             try
             {
