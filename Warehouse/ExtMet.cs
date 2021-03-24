@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
+using System.Linq;
 
 namespace Warehouse.Products
 {
@@ -11,17 +12,10 @@ namespace Warehouse.Products
         {
             return $"Product {a.name} SKU = {a.SKU}";
         }
-        public static ArrayList ProdofTwo(this Warehouse a, Warehouse b)
+        public static List<IProduct> ProdofTwo(this Warehouse a, Warehouse b)
         {
-            ArrayList matches = new ArrayList();
-            foreach(IProduct i in a.products)
-            {
-                if (b.Finder(i.SKU))
-                {
-                    matches.Add(i);
-                }
-            }
-            return matches;
+            IEnumerable<IProduct> match = a.products.Union(b.products); 
+            return match.ToList();
         }
         public static string HalfofProd(this Warehouse a, Warehouse b, IProduct c)
         {

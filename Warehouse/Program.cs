@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using Warehouse.Products;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Warehouse
 {
@@ -67,22 +69,16 @@ namespace Warehouse
             int FinPrice = HouseofLiquid.Totalprice();
             FinPrice += HouseofGrit.Totalprice();
             FinPrice += HouseofObject.Totalprice();
-            int hoo_price = HouseofObject.Totalprice();
-            Console.WriteLine(hoo_price);
             Console.WriteLine(FinPrice);
 
             string Mov = HouseofLiquid.Move(poison, HouseofObject, 4);
             Console.WriteLine(Mov);
 
-            hoo_price = HouseofObject.Totalprice();
-            Console.WriteLine(hoo_price);
-            Console.WriteLine("test");
-
             string NameSKUtest = heart.NameSKU();
             Console.WriteLine(NameSKUtest);
 
             HouseofObject.Adding(aj, 7);
-            ArrayList matches = HouseofLiquid.ProdofTwo(HouseofObject);
+            List<IProduct> matches = HouseofLiquid.ProdofTwo(HouseofObject);
             Console.WriteLine("Products in two warehouses:");
             foreach(IProduct i in matches)
             {
@@ -96,7 +92,13 @@ namespace Warehouse
             Console.WriteLine(Reshalf);
             HouseofGrit.Adding(cocaine, 0);
 
-            try
+            List<IProduct>Morethree = HouseofAll.MoreThree();
+            foreach (IProduct i in Morethree)
+            {
+                Console.WriteLine(i.name + " " + i.quantity);
+            }
+
+/*            try
             {
                 HouseofLiquid.Adding(sugar, 1);
             }
@@ -107,7 +109,7 @@ namespace Warehouse
             finally
             {
                 Console.WriteLine("Test complited");
-            }
+            }*/
         }
     }
 }

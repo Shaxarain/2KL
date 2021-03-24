@@ -9,7 +9,7 @@ namespace Warehouse
     {
         Address address;
         public int area;
-        public ArrayList products = new ArrayList();
+        public List<IProduct> products = new List<IProduct>();
         public bool type; //true = open
         public string main_emp;
         public int quantity;
