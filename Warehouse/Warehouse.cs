@@ -25,7 +25,7 @@ namespace Warehouse
             IProduct t = (IProduct)p.Clone();
             if (p.type == "grit" && this.type == true)
             {
-                UncorAddNotify?.Invoke(this, new AddProdEventArgs("Grit products are not added to open warehouses", this.address, p.name));
+                UncorAddNotify?.Invoke(this, new AddProdEventArgs("Grit products are not added to open warehouses", this.address, p.name, q));
                 throw new Exception("Grit products are not added to open warehouses");
             }
             else
@@ -34,7 +34,7 @@ namespace Warehouse
                 {
                     t.quantity += q;
                     this.products.Add(t);
-                    AdProdNotify?.Invoke(this, new AddProdEventArgs("Product added to warehouse", this.address, p.name));
+                    AdProdNotify?.Invoke(this, new AddProdEventArgs($"Product {p.name} added to warehouse {this.address.city} in amount {q}", this.address, p.name, q));
                 }
                 else
                 {
@@ -43,7 +43,7 @@ namespace Warehouse
                         if (i.SKU == p.SKU)
                         {
                             i.quantity += q;
-                            AdProdNotify?.Invoke(this, new AddProdEventArgs("Product added to warehouse", this.address, p.name));
+                            AdProdNotify?.Invoke(this, new AddProdEventArgs($"More product {p.name} added to warehouse {this.address.city} in amount {q} and now = {i.quantity}", this.address, p.name, q));
                         }
                     }
                 }

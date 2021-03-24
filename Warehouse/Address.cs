@@ -6,7 +6,7 @@ namespace Warehouse
 {
     class Address
     {
-        string city { get; set; }
+        public string city { get; set; }
         string street { get; set; }
         int number { get; set; }
 

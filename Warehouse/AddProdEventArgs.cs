@@ -10,8 +10,9 @@ namespace Warehouse
         Address NameofWarehouse;
         string type = "adding";
         string NameofProd;
+        int AmProd;
         DateTime time = DateTime.Now;
 
-        public AddProdEventArgs(string a, Address b, string c) { AddProdMes = a; NameofWarehouse = b; NameofProd = c; }
+        public AddProdEventArgs(string a, Address b, string c, int d) { AddProdMes = a; NameofWarehouse = b; NameofProd = c; AmProd = d; }
     }
 }
