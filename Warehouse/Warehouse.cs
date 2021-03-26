@@ -7,7 +7,7 @@ namespace Warehouse
 {
     public class Warehouse
     {
-        Address address;
+        public Address address;
         public int area;
         public List<IProduct> products = new List<IProduct>();
         public bool type; //true = open

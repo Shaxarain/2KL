@@ -98,11 +98,20 @@ namespace Warehouse
             {
                 Console.WriteLine(i.name + " " + i.quantity);
             }
-            List<IProduct> Universal = HouseofAll.Unicum(HouseofGrit);
-            Console.WriteLine("Universal names..."); //We have a problems!!!
-            foreach (IProduct i in Universal)
+            List<string> Universal = HouseofAll.Unicum();
+            Console.WriteLine("Universal names...");
+            foreach (string i in Universal)
             {
-                Console.WriteLine(i.name);
+                Console.WriteLine(i);
+            }
+            Warehouse test = new Warehouse(sc, 2, false);
+            /*test.Adding(cocaine, 10);*/
+            // ???
+            List<string> NG = HouseofLiquid.NotGrid(HouseofGrit, test, HouseofObject);
+            Console.WriteLine("Warehouses without grit products");
+            foreach (string w in NG)
+            {
+                Console.WriteLine(w);
             }
 
             /*            try
