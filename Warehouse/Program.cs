@@ -3,6 +3,8 @@ using System.Collections;
 using Warehouse.Products;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
+using CsvHelper;
 
 namespace Warehouse
 {
@@ -11,6 +13,29 @@ namespace Warehouse
         private static void DisplayMessage(object sengder, AddProdEventArgs ea)
         {
             Console.WriteLine(ea.AddProdMes);
+        }
+        public static void CSVsaving(Warehouse a, string b, string c)
+        {
+            if (Directory.Exists(b))
+            {
+                int count = 1;
+                using (StreamWriter sw = new StreamWriter(c, true, System.Text.Encoding.Default))
+                {
+                    sw.WriteLine($"count;name;type;SKU;description;price;qiantity;");
+                }
+                foreach (IProduct pr in a.products)
+                {
+                    using (StreamWriter sw = new StreamWriter(c, true, System.Text.Encoding.Default))
+                    {
+                        sw.WriteLine($"{count};{pr.name};{pr.type};{pr.SKU};{pr.description};{pr.price};{pr.quantity};");
+                    }
+                    count++;
+                }
+            }
+            else
+            {
+                Console.WriteLine("File not saved");
+            }
         }
         static void Main(string[] args)
         {
@@ -113,6 +138,12 @@ namespace Warehouse
             {
                 Console.WriteLine(w);
             }
+            string dir = @"D";
+            string road = @"D:Products.csv";
+            DirectoryInfo dirInfo = new DirectoryInfo(dir);
+            dirInfo.Create();
+            CSVsaving(HouseofAll, dir, road);
+            CSVsaving(HouseofLiquid, dir, road);
 
             /*            try
                         {
