@@ -14,7 +14,7 @@ namespace Warehouse.Products
         }
         public static List<IProduct> ProdofTwo(this Warehouse a, Warehouse b)
         {
-            IEnumerable<IProduct> match = a.products.Union(b.products); 
+            IEnumerable<IProduct> match = (a.products).Union(b.products); 
             return match.ToList();
         }
         public static string HalfofProd(this Warehouse a, Warehouse b, IProduct c)

@@ -13,16 +13,22 @@ namespace Warehouse
         public bool type; //true = open
         public string main_emp;
         public int quantity;
+        Catalog Cat = Catalog.getInstance();
 
         public delegate void AddProd(Object sender, AddProdEventArgs ea);
         public event AddProd AdProdNotify;
         public event AddProd UncorAddNotify;
+        public event AddProd Hvnt;
 
         public Warehouse(Address a, int b, bool c) { address = a; area = b; type = c; }
 
         public void Adding(IProduct p, int q)
         {
             IProduct t = (IProduct)p.Clone();
+            if (p == null)
+            {
+                Hvnt?.Invoke(this, new AddProdEventArgs("We haven't this product in catalog.", this.address, p.name, q));
+            }
             if (p.type == "grit" && this.type == true)
             {
                 UncorAddNotify?.Invoke(this, new AddProdEventArgs("Grit products are not added to open warehouses", this.address, p.name, q));

@@ -39,6 +39,8 @@ namespace Warehouse
         }
         static void Main(string[] args)
         {
+            Catalog Cat = Catalog.getInstance();
+
             Employee Archi = new Employee("Archibald", "Dog");
             Employee Ch = new Employee("Cheburek", "Cooker");
 
@@ -56,35 +58,24 @@ namespace Warehouse
             HouseofGrit.AdProdNotify += DisplayMessage;
             Warehouse HouseofAll = new Warehouse(Neverhood, 100, false);
 
-            IProduct poison = new LiquidProduct("poison", "000", 666);
-            IProduct aj = new LiquidProduct("apple juice", "010", 560);
-            IProduct bj = new LiquidProduct("berry juice", "011", 600);
+            HouseofLiquid.Adding(Cat.Buying("010"), 1);
+            HouseofLiquid.Adding(Cat.Buying("011"), 1);
+            HouseofLiquid.Adding(Cat.Buying("000"), 5);
+            HouseofLiquid.Adding(Cat.Buying("000"), 10);
 
-            IProduct sugar = new GritProduct("sygar", "100", 500);
-            IProduct cocaine = new GritProduct("coconut flakes", "101", 3000);
-            cocaine.description = "Not a cocaine";
+            HouseofGrit.Adding(Cat.Buying("100"), 5);
+            HouseofGrit.Adding(Cat.Buying("101"), 228);
 
-            IProduct heart = new ObjectProduct("heart of human", "200", 5000);
-            IProduct mouse = new ObjectProduct("dead mouse", "201", 0);
+            HouseofObject.Adding(Cat.Buying("200"), 8);
+            HouseofObject.Adding(Cat.Buying("201"), 3);
 
-            HouseofLiquid.Adding(aj, 1);
-            HouseofLiquid.Adding(bj, 1);
-            HouseofLiquid.Adding(poison, 5);
-            HouseofLiquid.Adding(poison, 10);
-
-            HouseofGrit.Adding(sugar, 5);
-            HouseofGrit.Adding(cocaine, 228);
-
-            HouseofObject.Adding(heart, 8);
-            HouseofObject.Adding(mouse, 3);
-
-            HouseofAll.Adding(poison, 10);
-            HouseofAll.Adding(aj, 10);
-            HouseofAll.Adding(bj, 10);
-            HouseofAll.Adding(sugar, 10);
-            HouseofAll.Adding(cocaine, 10);
-            HouseofAll.Adding(heart, 10);
-            HouseofAll.Adding(mouse, 10);
+            HouseofAll.Adding(Cat.Buying("000"), 10);
+            HouseofAll.Adding(Cat.Buying("010"), 10);
+            HouseofAll.Adding(Cat.Buying("011"), 10);
+            HouseofAll.Adding(Cat.Buying("100"), 10);
+            HouseofAll.Adding(Cat.Buying("101"), 10);
+            HouseofAll.Adding(Cat.Buying("200"), 10);
+            HouseofAll.Adding(Cat.Buying("201"), 10);
 
             string EmpofWare = HouseofObject.Addresp_emp(Archi);
             string SKUofProd = HouseofLiquid.SKUfinder("011");
@@ -96,13 +87,13 @@ namespace Warehouse
             FinPrice += HouseofObject.Totalprice();
             Console.WriteLine(FinPrice);
 
-            string Mov = HouseofLiquid.Move(poison, HouseofObject, 4);
+            string Mov = HouseofLiquid.Move(Cat.Buying("000"), HouseofObject, 4);
             Console.WriteLine(Mov);
 
-            string NameSKUtest = heart.NameSKU();
+            string NameSKUtest = (Cat.Buying("200")).NameSKU();
             Console.WriteLine(NameSKUtest);
 
-            HouseofObject.Adding(aj, 7);
+            HouseofObject.Adding(Cat.Buying("010"), 7);
             List<IProduct> matches = HouseofLiquid.ProdofTwo(HouseofObject);
             Console.WriteLine("Products in two warehouses:");
             foreach(IProduct i in matches)
@@ -110,12 +101,12 @@ namespace Warehouse
                 Console.WriteLine(i.name);
             }
 
-            string Reshalf = HouseofGrit.HalfofProd(HouseofAll, cocaine);
+            string Reshalf = HouseofGrit.HalfofProd(HouseofAll, Cat.Buying("101"));
             Console.WriteLine(Reshalf);
-            HouseofAll.Move(cocaine, HouseofGrit, 10);
-            Reshalf = HouseofGrit.HalfofProd(HouseofAll, cocaine);
+            HouseofAll.Move(Cat.Buying("101"), HouseofGrit, 10);
+            Reshalf = HouseofGrit.HalfofProd(HouseofAll, Cat.Buying("101"));
             Console.WriteLine(Reshalf);
-            HouseofGrit.Adding(cocaine, 0);
+            HouseofGrit.Adding(Cat.Buying("101"), 0);
 
             List<IProduct>Morethree = HouseofAll.MoreThree();
             Console.WriteLine("More than three products:");
@@ -138,13 +129,13 @@ namespace Warehouse
             {
                 Console.WriteLine(w);
             }
+
             string dir = @"D";
             string road = @"D:Products.csv";
             DirectoryInfo dirInfo = new DirectoryInfo(dir);
             dirInfo.Create();
             CSVsaving(HouseofAll, dir, road);
             CSVsaving(HouseofLiquid, dir, road);
-
             /*            try
                         {
                             HouseofLiquid.Adding(sugar, 1);
