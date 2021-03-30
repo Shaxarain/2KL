@@ -9,21 +9,31 @@ namespace Warehouse
         public string name { get; set; }
         public string position { get; set; }
         public Employee(string a, string b) { name = a; position = b; }
-        public Warehouse Mywrh;
+        public Warehouse Mywrh { get; set; }
+        public delegate void Tasks(Object sender, AddProdEventArgs ea);
+        public event Tasks NewTask;
 
         ICommand command;
         List<ICommand> ListCom = new List<ICommand>();
-        public void ComForWman(ICommand com)
+       
+        public void ComsForEmp(IProduct product, int q)
         {
-            command = com;
+            ListCom.Add(new WrhOnCom(Mywrh, product, q));
+            NewTask?.Invoke(this, new AddProdEventArgs($"Product {product.name} will be add to warehouse {Mywrh.address.city} in amount {q}", Mywrh.address, product.name, q));
         }
-        public void Deliver()
+        public void Start()
         {
-            command.Execute();
+            foreach (ICommand i in ListCom)
+            {
+                i.Execute();
+            }
         }
-        public void Takeaway()
+        public void End()
         {
-            command.Undo();
+            foreach (ICommand i in ListCom)
+            {
+                i.Undo();
+            }
         }
     }
 }

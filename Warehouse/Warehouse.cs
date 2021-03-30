@@ -11,7 +11,7 @@ namespace Warehouse
         public int area;
         public List<IProduct> products = new List<IProduct>();
         public bool type; //true = open
-        public string main_emp;
+        public Employee main_emp;
         public int quantity;
         Catalog Cat = Catalog.getInstance();
 
@@ -69,12 +69,6 @@ namespace Warehouse
                     Hvnt?.Invoke(this, new AddProdEventArgs("We haven't this product in warehouse.", this.address, p.name, q));
                 }
             }
-        }
-        public static string Addresp_emp(this Warehouse a, Employee e)
-        {
-            a.main_emp = e.name;
-            e.Mywrh = a;
-            return "This warehouse have a new main employee - " + e.name;
         }
         public string SKUfinder(string a)
         {

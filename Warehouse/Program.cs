@@ -14,6 +14,10 @@ namespace Warehouse
         {
             Console.WriteLine(ea.AddProdMes);
         }
+        private static void Dzin(object client, AddProdEventArgs ea)
+        {
+            Console.WriteLine(ea.AddProdMes);
+        }
         public static void CSVsaving(Warehouse a, string b, string c)
         {
             if (Directory.Exists(b))
@@ -43,6 +47,8 @@ namespace Warehouse
 
             Employee Archi = new Employee("Archibald", "Dog");
             Employee Ch = new Employee("Cheburek", "Cooker");
+            Employee Kozya = new Employee("Kuzma", "Worker");
+            Employee No = new Employee("Eleonora", "Worker");
 
             Address sc = new Address("Somewhere", "Somestreet", 55);
             Address ololo = new Address("Ololand", "Olostreet", 01010);
@@ -58,6 +64,13 @@ namespace Warehouse
             HouseofGrit.AdProdNotify += DisplayMessage;
             Warehouse HouseofAll = new Warehouse(Neverhood, 100, false);
             HouseofAll.AdProdNotify += DisplayMessage;
+
+            string EmpofWare = HouseofAll.Addresp_emp(Archi);
+            HouseofAll.Addresp_emp(Archi);
+            HouseofLiquid.Addresp_emp(No);
+            HouseofGrit.Addresp_emp(Kozya);
+            HouseofObject.Addresp_emp(Ch);
+            Console.WriteLine(EmpofWare);
 
             HouseofLiquid.Adding(Cat.Buying("010"), 1);
             HouseofLiquid.Adding(Cat.Buying("011"), 1);
@@ -78,7 +91,6 @@ namespace Warehouse
             HouseofAll.Adding(Cat.Buying("200"), 10);
             HouseofAll.Adding(Cat.Buying("201"), 10);
 
-            string EmpofWare = HouseofObject.Addresp_emp(Archi);
             string SKUofProd = HouseofLiquid.SKUfinder("011");
             Console.WriteLine(SKUofProd);
 
@@ -144,10 +156,11 @@ namespace Warehouse
             HouseofGrit.Delete(Cat.Buying("101"), 10);
 
             Console.WriteLine("Command test.");
-            .ComForWman(new WrhOnCom(HouseofAll, Cat.Buying("200"), 5));
-            .Deliver();
-            .Takeaway();
-
+            Archi.NewTask += Dzin;
+            Archi.ComsForEmp(Cat.Buying("200"), 5);
+            Archi.Start();
+            Archi.End();
+  
             /*            try
                         {
                             HouseofLiquid.Adding(sugar, 1);

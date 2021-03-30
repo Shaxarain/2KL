@@ -8,6 +8,12 @@ namespace Warehouse.Products
 {
     public static class ExtMet
     {
+        public static string Addresp_emp(this Warehouse a, Employee e)
+        {
+            a.main_emp = e;
+            e.Mywrh = a;
+            return "This warehouse have a new main employee - " + e.name;
+        }
         public static string NameSKU(this IProduct a)
         {
             return $"Product {a.name} SKU = {a.SKU}";
