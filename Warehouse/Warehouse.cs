@@ -70,9 +70,10 @@ namespace Warehouse
                 }
             }
         }
-        public string Addresp_emp(Employee e)
+        public static string Addresp_emp(this Warehouse a, Employee e)
         {
-            this.main_emp = e.name;
+            a.main_emp = e.name;
+            e.Mywrh = a;
             return "This warehouse have a new main employee - " + e.name;
         }
         public string SKUfinder(string a)

@@ -144,10 +144,9 @@ namespace Warehouse
             HouseofGrit.Delete(Cat.Buying("101"), 10);
 
             Console.WriteLine("Command test.");
-            Warehouseman Antoha = new Warehouseman();
-            Antoha.ComForWman(new WrhOnCom(HouseofAll, Cat.Buying("200"), 5));
-            Antoha.Deliver();
-            Antoha.Takeaway();
+            .ComForWman(new WrhOnCom(HouseofAll, Cat.Buying("200"), 5));
+            .Deliver();
+            .Takeaway();
 
             /*            try
                         {

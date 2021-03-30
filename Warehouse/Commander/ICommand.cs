@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Warehouse
 {
-    interface ICommand
+    public interface ICommand
     {
         void Execute();
         void Undo();
