@@ -57,6 +57,7 @@ namespace Warehouse
             Warehouse HouseofGrit = new Warehouse(Dudley, 333, false);
             HouseofGrit.AdProdNotify += DisplayMessage;
             Warehouse HouseofAll = new Warehouse(Neverhood, 100, false);
+            HouseofAll.AdProdNotify += DisplayMessage;
 
             HouseofLiquid.Adding(Cat.Buying("010"), 1);
             HouseofLiquid.Adding(Cat.Buying("011"), 1);
@@ -130,12 +131,24 @@ namespace Warehouse
                 Console.WriteLine(w);
             }
 
-            string dir = @"D";
-            string road = @"D:Products.csv";
+            /*            string dir = @"D";
+                        string road = @"D:Products.csv";*/
+            string dir = @"E";
+            string road = @"E:Products.csv";
+
             DirectoryInfo dirInfo = new DirectoryInfo(dir);
             dirInfo.Create();
             CSVsaving(HouseofAll, dir, road);
             CSVsaving(HouseofLiquid, dir, road);
+
+            HouseofGrit.Delete(Cat.Buying("101"), 10);
+
+            Console.WriteLine("Command test.");
+            Warehouseman Antoha = new Warehouseman();
+            Antoha.ComForWman(new WrhOnCom(HouseofAll, Cat.Buying("200"), 5));
+            Antoha.Deliver();
+            Antoha.Takeaway();
+
             /*            try
                         {
                             HouseofLiquid.Adding(sugar, 1);

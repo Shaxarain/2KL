@@ -55,6 +55,21 @@ namespace Warehouse
                 }
             }
         }
+        public void Delete(IProduct p, int q)
+        {
+            foreach (IProduct i in this.products)
+            {
+                if (i.SKU == p.SKU)
+                {
+                    i.quantity -= q;
+                    AdProdNotify?.Invoke(this, new AddProdEventArgs($"Product {p.name} deleted from warehouse {this.address.city} in amount {q} and now = {i.quantity}", this.address, p.name, q));
+                }
+                else
+                {
+                    Hvnt?.Invoke(this, new AddProdEventArgs("We haven't this product in warehouse.", this.address, p.name, q));
+                }
+            }
+        }
         public string Addresp_emp(Employee e)
         {
             this.main_emp = e.name;
