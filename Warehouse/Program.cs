@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using CsvHelper;
+using System.Threading;
 
 namespace Warehouse
 {
@@ -72,24 +73,29 @@ namespace Warehouse
             HouseofObject.Addresp_emp(Ch);
             Console.WriteLine(EmpofWare);
 
-            HouseofLiquid.Adding(Cat.Buying("010"), 1);
-            HouseofLiquid.Adding(Cat.Buying("011"), 1);
-            HouseofLiquid.Adding(Cat.Buying("000"), 5);
-            HouseofLiquid.Adding(Cat.Buying("000"), 10);
+            No.ComsForEmp(Cat.Buying("010"), 1);
+            No.ComsForEmp(Cat.Buying("011"), 1);
+            No.ComsForEmp(Cat.Buying("000"), 5);
+            No.ComsForEmp(Cat.Buying("000"), 10);
 
-            HouseofGrit.Adding(Cat.Buying("100"), 5);
-            HouseofGrit.Adding(Cat.Buying("101"), 228);
+            Kozya.ComsForEmp(Cat.Buying("100"), 5);
+            Kozya.ComsForEmp(Cat.Buying("101"), 228);
 
-            HouseofObject.Adding(Cat.Buying("200"), 8);
-            HouseofObject.Adding(Cat.Buying("201"), 3);
+            Ch.ComsForEmp(Cat.Buying("200"), 8);
+            Ch.ComsForEmp(Cat.Buying("201"), 3);
 
-            HouseofAll.Adding(Cat.Buying("000"), 10);
-            HouseofAll.Adding(Cat.Buying("010"), 10);
-            HouseofAll.Adding(Cat.Buying("011"), 10);
-            HouseofAll.Adding(Cat.Buying("100"), 10);
-            HouseofAll.Adding(Cat.Buying("101"), 10);
-            HouseofAll.Adding(Cat.Buying("200"), 10);
-            HouseofAll.Adding(Cat.Buying("201"), 10);
+            Console.WriteLine("Command test.");
+            Archi.NewTask += Dzin;
+            Archi.ComsForEmp(Cat.Buying("200"), 5);
+            Archi.ComsForEmp(Cat.Buying("000"), 10);
+            Archi.ComsForEmp(Cat.Buying("010"), 10);
+            Archi.ComsForEmp(Cat.Buying("011"), 10);
+            Archi.ComsForEmp(Cat.Buying("100"), 10);
+            Archi.ComsForEmp(Cat.Buying("101"), 10);
+            Archi.ComsForEmp(Cat.Buying("200"), 10);
+            Archi.ComsForEmp(Cat.Buying("201"), 10);
+
+            Archi.Start();
 
             string SKUofProd = HouseofLiquid.SKUfinder("011");
             Console.WriteLine(SKUofProd);
@@ -106,7 +112,7 @@ namespace Warehouse
             string NameSKUtest = (Cat.Buying("200")).NameSKU();
             Console.WriteLine(NameSKUtest);
 
-            HouseofObject.Adding(Cat.Buying("010"), 7);
+            Ch.ComsForEmp(Cat.Buying("010"), 7);
             List<IProduct> matches = HouseofLiquid.ProdofTwo(HouseofObject);
             Console.WriteLine("Products in two warehouses:");
             foreach(IProduct i in matches)
@@ -155,11 +161,7 @@ namespace Warehouse
 
             HouseofGrit.Delete(Cat.Buying("101"), 10);
 
-            Console.WriteLine("Command test.");
-            Archi.NewTask += Dzin;
-            Archi.ComsForEmp(Cat.Buying("200"), 5);
-            Archi.Start();
-            Archi.End();
+            
   
             /*            try
                         {
