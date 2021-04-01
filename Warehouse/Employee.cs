@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,10 +13,10 @@ namespace Warehouse
         public Warehouse Mywrh { get; set; }
         public delegate void Tasks(Object sender, AddProdEventArgs ea);
         public event Tasks NewTask;
-        List<ICommand> ListCom = new List<ICommand>();
+        ConcurrentQueue<ICommand> ListCom = new ConcurrentQueue<ICommand>();
         public void ComsForEmp(IProduct product, int q)
         {
-            ListCom.Add(new WrhOnCom(Mywrh, product, q));
+            ListCom.Enqueue(new WrhOnCom(Mywrh, product, q));
             NewTask?.Invoke(this, new AddProdEventArgs($"Task of adding {product.name} to warehouse {Mywrh.address.city} in amount {q} create", Mywrh.address, product.name, q));
         }
         public void Plus()

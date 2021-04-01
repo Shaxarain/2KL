@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using CsvHelper;
+using System.Threading.Tasks;
 using System.Threading;
 
 namespace Warehouse
@@ -73,38 +74,27 @@ namespace Warehouse
             HouseofObject.Addresp_emp(Ch);
             Console.WriteLine(EmpofWare);
 
-            Console.WriteLine("Add to HoL");
+            List<Task> Tasks = new List<Task>();
+
             No.NewTask += Dzin;
             No.ComsForEmp(Cat.Buying("010"), 1);
             No.ComsForEmp(Cat.Buying("011"), 1);
             No.ComsForEmp(Cat.Buying("000"), 5);
             No.ComsForEmp(Cat.Buying("000"), 10);
-            void NS()
-            {
-                No.Plus();
-            }
-            Thread HoL = new Thread(new ThreadStart(NS));
-            HoL.Start();
+            Task HoL = new Task(() => No.Plus());
+            Tasks.Add(HoL);
 
             Kozya.NewTask += Dzin;
             Kozya.ComsForEmp(Cat.Buying("100"), 5);
             Kozya.ComsForEmp(Cat.Buying("101"), 228);
-            void KS()
-            {
-                Kozya.Plus();
-            }
-            Thread HoG = new Thread(new ThreadStart(KS));
-            HoG.Start();
+            Task HoG = new Task(() => Kozya.Plus());
+            Tasks.Add(HoG);
 
             Ch.NewTask += Dzin;
             Ch.ComsForEmp(Cat.Buying("200"), 8);
             Ch.ComsForEmp(Cat.Buying("201"), 3);
-            void ChS()
-            {
-                Ch.Plus();
-            }
-            Thread HoO = new Thread(new ThreadStart(ChS));
-            HoO.Start();
+            Task HoO = new Task(() => Ch.Plus());
+            Tasks.Add(HoO);
 
             Archi.NewTask += Dzin;
             Archi.ComsForEmp(Cat.Buying("200"), 5);
@@ -115,12 +105,32 @@ namespace Warehouse
             Archi.ComsForEmp(Cat.Buying("101"), 10);
             Archi.ComsForEmp(Cat.Buying("200"), 10);
             Archi.ComsForEmp(Cat.Buying("201"), 10);
-            void AS()
+            Task HoA = new Task(() => Archi.Plus());
+            Tasks.Add(HoA);
+
+            CancellationTokenSource CToken = new CancellationTokenSource();
+            CancellationToken token = CToken.Token;
+
+            var Houses = Task.Factory.StartNew(() =>
             {
-                Archi.Plus();
-            }
-            Thread HoA = new Thread(new ThreadStart(AS));
-            HoA.Start();
+                Console.WriteLine("Start adding tasks? (No for stop)");
+                foreach (Task i in Tasks)
+                {
+                    string ans = Console.ReadLine();
+                    if (ans == "No" || ans == "no")
+                    {
+                        CToken.Cancel();
+                    }
+                    if (token.IsCancellationRequested)
+                    {
+                        Console.WriteLine("Operation stopped!");
+                        return;
+                    }
+                    var AddTask = Task.Factory.StartNew(() => i.Start(), TaskCreationOptions.AttachedToParent);
+                    AddTask.Wait();
+                }
+            });
+            Houses.Wait();
 
             string SKUofProd = HouseofLiquid.SKUfinder("011");
             Console.WriteLine(SKUofProd);
@@ -157,8 +167,6 @@ namespace Warehouse
             dirInfo.Create();
             CSVsaving(HouseofAll, dir, road);
             CSVsaving(HouseofLiquid, dir, road);
-
-  
             /*            try
                         {
                             HouseofLiquid.Adding(sugar, 1);
