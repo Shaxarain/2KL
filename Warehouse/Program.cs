@@ -73,22 +73,38 @@ namespace Warehouse
             HouseofObject.Addresp_emp(Ch);
             Console.WriteLine(EmpofWare);
 
-            //No.NewTask += Dzin;
+            Console.WriteLine("Add to HoL");
+            No.NewTask += Dzin;
             No.ComsForEmp(Cat.Buying("010"), 1);
             No.ComsForEmp(Cat.Buying("011"), 1);
             No.ComsForEmp(Cat.Buying("000"), 5);
             No.ComsForEmp(Cat.Buying("000"), 10);
-            No.Start();
+            void NS()
+            {
+                No.Plus();
+            }
+            Thread HoL = new Thread(new ThreadStart(NS));
+            HoL.Start();
 
-            //Kozya.NewTask += Dzin;
+            Kozya.NewTask += Dzin;
             Kozya.ComsForEmp(Cat.Buying("100"), 5);
             Kozya.ComsForEmp(Cat.Buying("101"), 228);
-            Kozya.Start();
+            void KS()
+            {
+                Kozya.Plus();
+            }
+            Thread HoG = new Thread(new ThreadStart(KS));
+            HoG.Start();
 
-            //Ch.NewTask += Dzin;
+            Ch.NewTask += Dzin;
             Ch.ComsForEmp(Cat.Buying("200"), 8);
             Ch.ComsForEmp(Cat.Buying("201"), 3);
-            Ch.Start();
+            void ChS()
+            {
+                Ch.Plus();
+            }
+            Thread HoO = new Thread(new ThreadStart(ChS));
+            HoO.Start();
 
             Archi.NewTask += Dzin;
             Archi.ComsForEmp(Cat.Buying("200"), 5);
@@ -99,7 +115,12 @@ namespace Warehouse
             Archi.ComsForEmp(Cat.Buying("101"), 10);
             Archi.ComsForEmp(Cat.Buying("200"), 10);
             Archi.ComsForEmp(Cat.Buying("201"), 10);
-            Archi.Start();
+            void AS()
+            {
+                Archi.Plus();
+            }
+            Thread HoA = new Thread(new ThreadStart(AS));
+            HoA.Start();
 
             string SKUofProd = HouseofLiquid.SKUfinder("011");
             Console.WriteLine(SKUofProd);
@@ -116,15 +137,11 @@ namespace Warehouse
             string NameSKUtest = (Cat.Buying("200")).NameSKU();
             Console.WriteLine(NameSKUtest);
 
-            Ch.ComsForEmp(Cat.Buying("010"), 7);
             List<IProduct> matches = HouseofLiquid.ProdofTwo(HouseofObject);
 
             string Reshalf = HouseofGrit.HalfofProd(HouseofAll, Cat.Buying("101"));
-            Console.WriteLine(Reshalf);
             HouseofAll.Move(Cat.Buying("101"), HouseofGrit, 10);
             Reshalf = HouseofGrit.HalfofProd(HouseofAll, Cat.Buying("101"));
-            Console.WriteLine(Reshalf);
-            HouseofGrit.Adding(Cat.Buying("101"), 0);
 
             List<IProduct>Morethree = HouseofAll.MoreThree();
             List<string> Universal = HouseofAll.Unicum();

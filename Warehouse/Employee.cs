@@ -12,23 +12,20 @@ namespace Warehouse
         public Warehouse Mywrh { get; set; }
         public delegate void Tasks(Object sender, AddProdEventArgs ea);
         public event Tasks NewTask;
-
-        ICommand command;
         List<ICommand> ListCom = new List<ICommand>();
-       
         public void ComsForEmp(IProduct product, int q)
         {
             ListCom.Add(new WrhOnCom(Mywrh, product, q));
             NewTask?.Invoke(this, new AddProdEventArgs($"Task of adding {product.name} to warehouse {Mywrh.address.city} in amount {q} create", Mywrh.address, product.name, q));
         }
-        public void Start()
+        public void Plus()
         {
             foreach (ICommand i in ListCom)
             {
                 i.Execute();
             }
         }
-        public void End()
+        public void Minus()
         {
             foreach (ICommand i in ListCom)
             {
