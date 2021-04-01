@@ -97,13 +97,12 @@ namespace Warehouse
             Tasks.Add(HoO);
 
             Archi.NewTask += Dzin;
-            Archi.ComsForEmp(Cat.Buying("200"), 5);
+            Archi.ComsForEmp(Cat.Buying("200"), 10);
             Archi.ComsForEmp(Cat.Buying("000"), 10);
             Archi.ComsForEmp(Cat.Buying("010"), 10);
             Archi.ComsForEmp(Cat.Buying("011"), 10);
-            Archi.ComsForEmp(Cat.Buying("100"), 10);
+            Archi.ComsForEmp(Cat.Buying("100"), 1);
             Archi.ComsForEmp(Cat.Buying("101"), 10);
-            Archi.ComsForEmp(Cat.Buying("200"), 10);
             Archi.ComsForEmp(Cat.Buying("201"), 10);
             Task HoA = new Task(() => Archi.Plus());
             Tasks.Add(HoA);
@@ -153,12 +152,12 @@ namespace Warehouse
             HouseofAll.Move(Cat.Buying("101"), HouseofGrit, 10);
             Reshalf = HouseofGrit.HalfofProd(HouseofAll, Cat.Buying("101"));
 
-            List<IProduct>Morethree = HouseofAll.MoreThree();
-            List<string> Universal = HouseofAll.Unicum();
-            Warehouse test = new Warehouse(sc, 2, false);
-            List<string> NG = HouseofLiquid.NotGrid(HouseofGrit, test, HouseofObject);
-
-            /*            string dir = @"D";
+            Parallel.Invoke(
+                () => Reports.MoreThreeAsync(HouseofAll),
+                () => Reports.UnicumAsync(HouseofAll),
+                () => Reports.MostAsync(HouseofGrit),
+                () => Reports.NotGridAsync(HouseofLiquid, HouseofAll, HouseofGrit));
+            /*          string dir = @"D";
                         string road = @"D:Products.csv";*/
             string dir = @"E";
             string road = @"E:Products.csv";
