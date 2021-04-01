@@ -73,18 +73,23 @@ namespace Warehouse
             HouseofObject.Addresp_emp(Ch);
             Console.WriteLine(EmpofWare);
 
+            //No.NewTask += Dzin;
             No.ComsForEmp(Cat.Buying("010"), 1);
             No.ComsForEmp(Cat.Buying("011"), 1);
             No.ComsForEmp(Cat.Buying("000"), 5);
             No.ComsForEmp(Cat.Buying("000"), 10);
+            No.Start();
 
+            //Kozya.NewTask += Dzin;
             Kozya.ComsForEmp(Cat.Buying("100"), 5);
             Kozya.ComsForEmp(Cat.Buying("101"), 228);
+            Kozya.Start();
 
+            //Ch.NewTask += Dzin;
             Ch.ComsForEmp(Cat.Buying("200"), 8);
             Ch.ComsForEmp(Cat.Buying("201"), 3);
+            Ch.Start();
 
-            Console.WriteLine("Command test.");
             Archi.NewTask += Dzin;
             Archi.ComsForEmp(Cat.Buying("200"), 5);
             Archi.ComsForEmp(Cat.Buying("000"), 10);
@@ -94,7 +99,6 @@ namespace Warehouse
             Archi.ComsForEmp(Cat.Buying("101"), 10);
             Archi.ComsForEmp(Cat.Buying("200"), 10);
             Archi.ComsForEmp(Cat.Buying("201"), 10);
-
             Archi.Start();
 
             string SKUofProd = HouseofLiquid.SKUfinder("011");
@@ -114,11 +118,6 @@ namespace Warehouse
 
             Ch.ComsForEmp(Cat.Buying("010"), 7);
             List<IProduct> matches = HouseofLiquid.ProdofTwo(HouseofObject);
-            Console.WriteLine("Products in two warehouses:");
-            foreach(IProduct i in matches)
-            {
-                Console.WriteLine(i.name);
-            }
 
             string Reshalf = HouseofGrit.HalfofProd(HouseofAll, Cat.Buying("101"));
             Console.WriteLine(Reshalf);
@@ -128,26 +127,9 @@ namespace Warehouse
             HouseofGrit.Adding(Cat.Buying("101"), 0);
 
             List<IProduct>Morethree = HouseofAll.MoreThree();
-            Console.WriteLine("More than three products:");
-            foreach (IProduct i in Morethree)
-            {
-                Console.WriteLine(i.name + " " + i.quantity);
-            }
             List<string> Universal = HouseofAll.Unicum();
-            Console.WriteLine("Universal names...");
-            foreach (string i in Universal)
-            {
-                Console.WriteLine(i);
-            }
             Warehouse test = new Warehouse(sc, 2, false);
-            /*test.Adding(cocaine, 10);*/
-            // ???
             List<string> NG = HouseofLiquid.NotGrid(HouseofGrit, test, HouseofObject);
-            Console.WriteLine("Warehouses without grit products");
-            foreach (string w in NG)
-            {
-                Console.WriteLine(w);
-            }
 
             /*            string dir = @"D";
                         string road = @"D:Products.csv";*/
@@ -159,9 +141,6 @@ namespace Warehouse
             CSVsaving(HouseofAll, dir, road);
             CSVsaving(HouseofLiquid, dir, road);
 
-            HouseofGrit.Delete(Cat.Buying("101"), 10);
-
-            
   
             /*            try
                         {

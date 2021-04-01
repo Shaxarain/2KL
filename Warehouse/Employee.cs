@@ -19,7 +19,7 @@ namespace Warehouse
         public void ComsForEmp(IProduct product, int q)
         {
             ListCom.Add(new WrhOnCom(Mywrh, product, q));
-            NewTask?.Invoke(this, new AddProdEventArgs($"Product {product.name} will be add to warehouse {Mywrh.address.city} in amount {q}", Mywrh.address, product.name, q));
+            NewTask?.Invoke(this, new AddProdEventArgs($"Task of adding {product.name} to warehouse {Mywrh.address.city} in amount {q} create", Mywrh.address, product.name, q));
         }
         public void Start()
         {
