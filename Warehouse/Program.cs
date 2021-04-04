@@ -7,6 +7,9 @@ using System.IO;
 using CsvHelper;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Security.Cryptography;
+using System.Text;
+using Reports;
 
 namespace Warehouse
 {
@@ -41,6 +44,17 @@ namespace Warehouse
             else
             {
                 Console.WriteLine("File not saved");
+            }
+        }
+        public static void md5(int count, string inp)
+        {
+            var md5 = MD5.Create();
+            for (int i = 1; i < count+1; i++)
+            {
+                Console.WriteLine($"{i} hash start");
+                var result = md5.ComputeHash(Encoding.UTF8.GetBytes(inp));
+                Console.WriteLine(Convert.ToBase64String(result));
+                Console.WriteLine($"{i} hash done");
             }
         }
         static void Main(string[] args)
@@ -157,6 +171,7 @@ namespace Warehouse
                 () => Reports.UnicumAsync(HouseofAll),
                 () => Reports.MostAsync(HouseofGrit),
                 () => Reports.NotGridAsync(HouseofLiquid, HouseofAll, HouseofGrit));
+
             /*          string dir = @"D";
                         string road = @"D:Products.csv";*/
             string dir = @"E";
@@ -166,6 +181,8 @@ namespace Warehouse
             dirInfo.Create();
             CSVsaving(HouseofAll, dir, road);
             CSVsaving(HouseofLiquid, dir, road);
+
+            md5(3, "hello");
             /*            try
                         {
                             HouseofLiquid.Adding(sugar, 1);
