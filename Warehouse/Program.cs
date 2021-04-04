@@ -160,7 +160,9 @@ namespace Warehouse
                 () => Reports.MostAsync(HouseofGrit),
                 () => Reports.NotGridAsync(HouseofLiquid, HouseofAll, HouseofGrit));
 
-            Parallel.For(1, 64, Archi.md5);
+            Task alotoftasks = new Task (() => Parallel.For(1, 64, Archi.md5));
+            alotoftasks.Start();
+            Task.WaitAll(alotoftasks);
 
             /*          string dir = @"D";
                         string road = @"D:Products.csv";*/
