@@ -111,8 +111,9 @@ namespace Warehouse
 
             CancellationTokenSource CToken = new CancellationTokenSource();
             CancellationToken token = CToken.Token;
+            TaskFactory factory = new TaskFactory();
 
-            var Houses = Task.Factory.StartNew(() =>
+            var Houses = factory.StartNew(() =>
             {
                 Console.WriteLine("Start adding tasks? (No for stop)");
                 foreach (Task i in Tasks)
@@ -160,7 +161,7 @@ namespace Warehouse
                 () => Reports.MostAsync(HouseofGrit),
                 () => Reports.NotGridAsync(HouseofLiquid, HouseofAll, HouseofGrit));
 
-            Task alotoftasks = new Task (() => Parallel.For(1, 64, Archi.md5));
+            Task alotoftasks = new Task (() => Parallel.For(1, 3, Archi.md5));
             alotoftasks.Start();
             Task.WaitAll(alotoftasks);
 
