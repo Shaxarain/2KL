@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace Warehouse
 {
@@ -31,6 +32,17 @@ namespace Warehouse
             foreach (ICommand i in ListCom)
             {
                 i.Undo();
+            }
+        }
+        public void md5(int count)
+        {
+            var md5 = MD5.Create();
+            for (int i = 1; i < count + 1; i++)
+            {
+                Console.WriteLine($"{i} hash start");
+                var result = md5.ComputeHash(Encoding.UTF8.GetBytes(this.name));
+                Console.WriteLine(Convert.ToBase64String(result));
+                Console.WriteLine($"{i} hash done");
             }
         }
     }
