@@ -111,9 +111,8 @@ namespace Warehouse
 
             CancellationTokenSource CToken = new CancellationTokenSource();
             CancellationToken token = CToken.Token;
-            TaskFactory factory = new TaskFactory();
 
-            var Houses = factory.StartNew(() =>
+            var Houses = Task.Factory.StartNew(() =>
             {
                 Console.WriteLine("Start adding tasks? (No for stop)");
                 foreach (Task i in Tasks)
@@ -164,6 +163,9 @@ namespace Warehouse
             Task alotoftasks = new Task (() => Parallel.For(1, 3, Archi.md5));
             alotoftasks.Start();
             Task.WaitAll(alotoftasks);
+
+            TaskFactory fac = new TaskFactory();
+            var sixteen = fac.StartNew(() => Parallel.For(1, 16, No.md5));
 
             /*          string dir = @"D";
                         string road = @"D:Products.csv";*/
