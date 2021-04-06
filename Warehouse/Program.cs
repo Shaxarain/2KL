@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections;
 using Warehouse.Products;
-using System.Linq;
 using System.Collections.Generic;
 using System.IO;
-using CsvHelper;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Security.Cryptography;
-using System.Text;
-using Microsoft.Extensions.Logging;
 using NLog;
 
 namespace Warehouse
