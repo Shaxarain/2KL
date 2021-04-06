@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Extensions.Logging;
+using NLog;
 
 namespace Warehouse
 {
@@ -176,6 +178,14 @@ namespace Warehouse
             dirInfo.Create();
             CSVsaving(HouseofAll, dir, road);
             CSVsaving(HouseofLiquid, dir, road);
+
+            Logger log = LogManager.GetCurrentClassLogger();
+            log.Trace("trace message");
+            log.Debug("debug message");
+            log.Info("info message");
+            log.Warn("warn message");
+            log.Error("error message");
+            log.Fatal("fatal message");
             /*            try
                         {
                             HouseofLiquid.Adding(sugar, 1);
