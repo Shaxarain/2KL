@@ -5,12 +5,20 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
 using NLog;
+using System.Reflection;
+using System.Linq;
 
 namespace Warehouse
 {
     class Program
     {
-
+        private static Type[] GetTypesInNamespace(Assembly assembly, string nameSpace)
+        {
+            return
+              assembly.GetTypes()
+                      .Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal))
+                      .ToArray();
+        }
         private static void DisplayMessage(object sengder, AddProdEventArgs ea)
         {
             Console.WriteLine(ea.AddProdMes);
@@ -159,22 +167,52 @@ namespace Warehouse
                 () => Reports.MostAsync(HouseofGrit),
                 () => Reports.NotGridAsync(HouseofLiquid, HouseofAll, HouseofGrit));
 
-            Task alotoftasks = new Task (() => Parallel.For(1, 3, Archi.md5));
+            /*Task alotoftasks = new Task(() => Parallel.For(1, 3, Archi.md5));
             alotoftasks.Start();
             Task.WaitAll(alotoftasks);
 
             TaskFactory fac = new TaskFactory();
-            var sixteen = fac.StartNew(() => Parallel.For(1, 16, No.md5));
+            var sixteen = fac.StartNew(() => Parallel.For(1, 3, No.md5));*/
 
             /*          string dir = @"D";
                         string road = @"D:Products.csv";*/
             string dir = @"E";
-            string road = @"E:Products.csv";
+            string road = @"E:/rep/Products.csv";
 
             DirectoryInfo dirInfo = new DirectoryInfo(dir);
             dirInfo.Create();
             CSVsaving(HouseofAll, dir, road);
             CSVsaving(HouseofLiquid, dir, road);
+
+            Console.WriteLine("trying");
+
+            /* Type[] typelist = GetTypesInNamespace(Assembly.GetExecutingAssembly(), "System");
+             foreach (Type t in typelist)
+             {
+                 Console.WriteLine(t.Name);
+             }*/
+            /*            var nameSpace = "System.Collections.Generic";
+                        Type a = typeof(System.Collections.Generic.KeyValuePair);
+
+
+                        Assembly asm = Assembly.LoadFrom(a.Namespace);
+
+                        var classes = asm.GetTypes().Where(p =>
+                             p.Namespace == nameSpace
+                        ).ToList();
+                        foreach (Type t in classes)
+                        {
+                            Console.WriteLine(t.Name);
+                        }*/
+
+            Assembly asm = Assembly.LoadFrom("C:/Program Files/dotnet/packs/Microsoft.NETCore.App.Ref/3.1.0/ref/netcoreapp3.1/System.Collections.dll");
+            Console.WriteLine(asm.FullName);
+            Type[] types = asm.GetTypes();
+            foreach (Type t in types)
+            {
+                Console.WriteLine(t.Name);
+            }
+            Console.ReadLine();
             /*            try
                         {
                             HouseofLiquid.Adding(sugar, 1);
