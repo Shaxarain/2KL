@@ -16,9 +16,12 @@ namespace Warehouse
 {
     class Program
     {
+
         private static void DisplayMessage(object sengder, AddProdEventArgs ea)
         {
             Console.WriteLine(ea.AddProdMes);
+            Logger log = LogManager.GetCurrentClassLogger();
+            log.Trace(ea.AddProdMes);
         }
         private static void Dzin(object client, AddProdEventArgs ea)
         {
@@ -178,14 +181,6 @@ namespace Warehouse
             dirInfo.Create();
             CSVsaving(HouseofAll, dir, road);
             CSVsaving(HouseofLiquid, dir, road);
-
-            Logger log = LogManager.GetCurrentClassLogger();
-            log.Trace("trace message");
-            log.Debug("debug message");
-            log.Info("info message");
-            log.Warn("warn message");
-            log.Error("error message");
-            log.Fatal("fatal message");
             /*            try
                         {
                             HouseofLiquid.Adding(sugar, 1);
