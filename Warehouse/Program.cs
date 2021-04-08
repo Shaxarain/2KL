@@ -184,35 +184,22 @@ namespace Warehouse
             CSVsaving(HouseofAll, dir, road);
             CSVsaving(HouseofLiquid, dir, road);
 
-            Console.WriteLine("trying");
-
-            /* Type[] typelist = GetTypesInNamespace(Assembly.GetExecutingAssembly(), "System");
-             foreach (Type t in typelist)
-             {
-                 Console.WriteLine(t.Name);
-             }*/
-            /*            var nameSpace = "System.Collections.Generic";
-                        Type a = typeof(System.Collections.Generic.KeyValuePair);
-
-
-                        Assembly asm = Assembly.LoadFrom(a.Namespace);
-
-                        var classes = asm.GetTypes().Where(p =>
-                             p.Namespace == nameSpace
-                        ).ToList();
-                        foreach (Type t in classes)
-                        {
-                            Console.WriteLine(t.Name);
-                        }*/
-
             Assembly asm = Assembly.LoadFrom("C:/Program Files/dotnet/packs/Microsoft.NETCore.App.Ref/3.1.0/ref/netcoreapp3.1/System.Collections.dll");
             Console.WriteLine(asm.FullName);
             Type[] types = asm.GetTypes();
-            foreach (Type t in types)
+            /*foreach (Type t in types)
             {
                 Console.WriteLine(t.Name);
             }
-            Console.ReadLine();
+            Console.ReadLine();*/
+
+            Type MyType = typeof(string);
+            Type[] strI = MyType.GetInterfaces();
+            Console.WriteLine("String interfaces:");
+            foreach (Type i in strI)
+            {
+                Console.WriteLine(i);
+            }
             /*            try
                         {
                             HouseofLiquid.Adding(sugar, 1);
