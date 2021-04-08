@@ -29,29 +29,7 @@ namespace Warehouse
         {
             Console.WriteLine(ea.AddProdMes);
         }
-        public static void CSVsaving(Warehouse a, string b, string c)
-        {
-            if (Directory.Exists(b))
-            {
-                int count = 1;
-                using (StreamWriter sw = new StreamWriter(c, true, System.Text.Encoding.Default))
-                {
-                    sw.WriteLine($"count;name;type;SKU;description;price;qiantity;");
-                }
-                foreach (IProduct pr in a.products)
-                {
-                    using (StreamWriter sw = new StreamWriter(c, true, System.Text.Encoding.Default))
-                    {
-                        sw.WriteLine($"{count};{pr.name};{pr.type};{pr.SKU};{pr.description};{pr.price};{pr.quantity};");
-                    }
-                    count++;
-                }
-            }
-            else
-            {
-                Console.WriteLine("File not saved");
-            }
-        }
+        
         static void Main(string[] args)
         {
             Catalog Cat = Catalog.getInstance();
@@ -163,7 +141,7 @@ namespace Warehouse
 
             Parallel.Invoke(
                 () => Reports.MoreThreeAsync(HouseofAll),
-                () => Reports.UnicumAsync(HouseofAll),
+                //() => Reports.UnicumAsync(HouseofAll),
                 () => Reports.MostAsync(HouseofGrit),
                 () => Reports.NotGridAsync(HouseofLiquid, HouseofAll, HouseofGrit));
 
@@ -181,8 +159,8 @@ namespace Warehouse
 
             DirectoryInfo dirInfo = new DirectoryInfo(dir);
             dirInfo.Create();
-            CSVsaving(HouseofAll, dir, road);
-            CSVsaving(HouseofLiquid, dir, road);
+            Excell.CSVsaving(HouseofAll, dir, road);
+            Excell.CSVsaving(HouseofLiquid, dir, road);
 
             Assembly asm = Assembly.LoadFrom("C:/Program Files/dotnet/packs/Microsoft.NETCore.App.Ref/3.1.0/ref/netcoreapp3.1/System.Collections.dll");
             Console.WriteLine(asm.FullName);
