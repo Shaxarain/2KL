@@ -14,28 +14,34 @@ namespace Warehouse
         public string description { get; set; }
         public string price { get; set; }
         public string quantity { get; set; }
-        public MyAttribute(string a, string b, string c, string d, string e, string f, string g)
-        { numb = a; name = b;  type = c; SKU = d; description = e; price = f; quantity = g; }
+        public MyAttribute(string numb, string name, string type, string SKU, string description, string price, string quantity)
+        { this.numb = numb; this.name = name; this.type = type; this.SKU = SKU; this.description = description; this.price = price; this.quantity = quantity; }
     }
-    [My("Number", "Name", "Type", "SKU", "Desription", "Price", "Quantity")]
-    class Excell
+    [My("Number", "Name", "Type", "SKU", null, "Price", "Quantity")]
+    public class Excell
     {
-        public static string numb = "Number";
-        public static string name = "Name";
-        public static string type = "Type";
-        public static string SKU = "SKU";
-        public static string description = "Description";
-        public static string price = "Price";
-        public static string quantity = "Quantity";
         public static void CSVsaving(Warehouse a, string b, string c)
         {
-            string head = $"{numb};{name};{type};{SKU};{description};{price};{quantity};";
+
             if (Directory.Exists(b))
             {
                 int count = 1;
+                Type t = typeof(Excell);
+
+                var pi = t.GetProperty("Name");
+                object [] aaaaaaaaa = t.GetProperties();
+
+                var k = typeof(Excell).GetCustomAttributes(typeof(MyAttribute), false);
+                System.Attribute[] attrs = System.Attribute.GetCustomAttributes(t);
+
                 using (StreamWriter sw = new StreamWriter(c, true, System.Text.Encoding.Default))
                 {
-                    sw.WriteLine(head);
+                    foreach (System.Attribute i in attrs)
+                    {
+                        MyAttribute ma = (MyAttribute)i;
+                        sw.Write($"{ma.numb};{ma.name};{ma.type};{ma.SKU};{ma.description};{ma.price};{ma.quantity};");
+                    }
+                    sw.WriteLine();
                 }
                 foreach (IProduct pr in a.products)
                 {
